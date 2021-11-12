@@ -8,7 +8,6 @@ import com.lenis0012.bukkit.loginsecurity.session.AuthMode;
 import com.lenis0012.bukkit.loginsecurity.session.PlayerSession;
 import com.lenis0012.bukkit.loginsecurity.storage.PlayerLocation;
 import com.lenis0012.bukkit.loginsecurity.storage.PlayerProfile;
-import com.lenis0012.bukkit.loginsecurity.util.InventorySerializer;
 import com.lenis0012.bukkit.loginsecurity.util.MetaData;
 import com.lenis0012.bukkit.loginsecurity.util.UserIdMode;
 import org.bukkit.Bukkit;
@@ -117,11 +116,6 @@ public class PlayerListener implements Listener {
             }
         }
 
-        // Admin update check
-        if(session.isAuthorized() && player.hasPermission("ls.update")) {
-            general.checkUpdates(player);
-        }
-
         if(session.isAuthorized() || !session.isRegistered()) {
             return;
         }
@@ -159,7 +153,6 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        general.checkUpdates(player);
     }
 
     @EventHandler

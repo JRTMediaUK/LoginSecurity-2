@@ -1,6 +1,5 @@
 package com.lenis0012.bukkit.loginsecurity.database.datasource;
 
-import com.lenis0012.bukkit.loginsecurity.LoginSecurity;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -108,6 +107,7 @@ public class SingleConnectionDataSource extends DataSourceAdapter implements Con
         try {
             connection.close();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -124,8 +124,6 @@ public class SingleConnectionDataSource extends DataSourceAdapter implements Con
 
     @Override
     public void connectionClosed(ConnectionEvent event) {
-//        LoginSecurity.getInstance().getLogger().log(Level.INFO, "Returning connection " + event.getSource().getClass().getSimpleName());
-//        Thread.dumpStack();
         this.lastUsedTime = System.currentTimeMillis();
         if(!obtainingConnection) lock.unlock();
     }
